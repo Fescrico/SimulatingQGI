@@ -1,0 +1,28 @@
+QuantumGI(graph1,graph2)
+
+For a vertex v in graph 1
+and each vertex w in graph 2
+And for adjencency matrix A1 for graph1 and A2 for graph2
+
+We need to find ground states of matrixes Av = A1 + I -|v><v|, Aw = A2 + I - |w><w|
+The ground states respectively are |s>, |t>
+
+# Preperation of quantum system
+adiabatic preperation of graph1 -> |s> # Note: that the adiabatic preperations might not need to be implemented as the paper states their time cost is negligible
+adiabatic preperation of graph2 -> |t> #       hence an alternative might be to just use preprepared states
+
+# Finding perumutations through altered Groves Search
+Need to make a Unitary matrix to make an iterative operator Q such that
+Q = U(I-2|s><s|)U+(I-2|t><t|)
+With <s|U|t> != 0
+
+Then perform Q, k = Pi/4 Sqrt(N) times in such manner
+Q^k U |s> = |phi>
+
+Check <t|phi> is approximately 1 else return up to
+
+Test on each |v> in graph 1 and w in graph 2 if Q^k is a permutation matrix
+This is at worst N^2 comparing all computational basis pairs
+
+At worst case need to repeat this procedure for all |v> so N loops at worst case.
+
